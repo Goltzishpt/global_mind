@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    container_name: iot_db
+    environment:
+      POSTGRES_DB: iot
+      POSTGRES_USER: iot_username
+      POSTGRES_PASSWORD: iot_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  web:
+    build:
+      context: .
+      dockerfile: app/Dockerfile
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://iot_username:iot_password@iot_db:5432/iot
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+
+
+volumes:
+  postgres_data:
