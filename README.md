@@ -1,5 +1,5 @@
 # Global mind
-This is a simple HTTP server for checking and downloading device firmware.
+This is a simple application for managing IoT devices in Python.
 
 ## Installation
 - Clone the repository: 
@@ -17,7 +17,7 @@ cd global_mind
 ``` bash Copy code
 docker-compose up --build -d
 ```
-- After build create a user and location(example below)
+- After building, create a user and a location using the example below.
 
 ``` bash Copy code
 curl -X POST http://0.0.0.0:8080/add_user \
@@ -30,7 +30,7 @@ curl -X POST http://0.0.0.0:8080/add_user \
 -d '{"name": "User1", "email": "user1@example.com", "password": "password"}'
 ```
 
-- After you could make CRUD operation with device
+- After you will be able to perform CRUD operations with the device.
 
 ``` bash Copy code
 curl -X POST http://0.0.0.0:8080/add_device \  
