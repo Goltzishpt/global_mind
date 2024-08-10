@@ -1,3 +1,5 @@
+## Yes, I know that the .env file should be hidden. This is just a test assignment.
+
 # Global mind
 This is a simple application for managing IoT devices in Python.
 
